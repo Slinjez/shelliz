@@ -1,0 +1,257 @@
+
+{% extends "layouts/adminlayout.html.twig" %}
+
+{% block head %}
+	{{ parent() }}
+    
+    <!-- Data table css -->
+    <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatable/css/buttons.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/assets/plugins/datatable/responsive.bootstrap5.css') }}" rel="stylesheet" />
+	<style>
+		.hide-me {
+			display: none;
+		}
+	</style>
+{% endblock %}
+{% block mainContent %}
+	<body
+		class="app sidebar-mini light-mode default-sidebar">
+
+		<!---Global-loader-->
+		<div id="global-loader">
+			<img src="{{ asset('assets/images/loader.svg') }}" alt="loader">
+		</div>
+
+		<div class="page">
+			<div
+				class="page-main">
+
+				<!--aside open-->
+				{% block sidenav %}
+					{{ parent() }}
+				{% endblock %}
+				<!--aside closed-->
+
+				<div class="app-content main-content">
+					<div
+						class="side-app">
+
+						<!--app header-->
+						{% block topnav %}
+							{{ parent() }}
+						{% endblock %}
+						<!--/app header-->
+
+						<!--Row-->
+						<div class="row">
+							<div
+								class="side-app">
+
+								<!--Page header-->
+								<div class="page-header">
+									<div class="page-leftheader">
+										<h4 class="page-title">{{page_name}}</h4>
+									</div>
+									<div class="page-rightheader ms-auto d-lg-flex d-none">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item">
+												<a href="/admin-dash" class="d-flex">
+													<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"/><path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3"/></svg>
+													<span class="breadcrumb-icon">
+														Home</span>
+												</a>
+											</li>
+											<li class="breadcrumb-item">
+												<a href="javascript:void(0)">{{page_name}}</a>
+											</li>
+										</ol>
+									</div>
+								</div>
+								<!--End Page header-->
+
+								<!-- Row -->
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12">
+										 <!--div-->
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">{{page_description}}</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-nowrap" id="result-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="wd-15p border-bottom-0">Client Name</th>
+                                                    <th class="wd-15p border-bottom-0">Client Email</th>
+                                                    <th class="wd-20p border-bottom-0">Client Phone</th>
+                                                    <th class="wd-15p border-bottom-0">ID Number</th>
+                                                    <th class="wd-10p border-bottom-0">PIN</th>
+                                                    <th class="wd-10p border-bottom-0">Join Date</th>
+                                                    <th class="wd-25p border-bottom-0">Status</th>
+                                                    <th class="wd-25p border-bottom-0">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/div-->
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- end app-content-->
+			</div>
+
+			<!--Footer-->
+
+			<!-- End Footer-->
+
+		</div>
+
+		<!-- Back to top -->
+		<a href="#top" id="back-to-top">
+			<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+		</a>
+
+
+		<div class="modal fade" id="new-bank" aria-hidden="true" style="display: none;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content modal-content-demo">
+					<div class="modal-header">
+						<h6 class="modal-title">New Bank</h6>
+						<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<form id="bank-form">
+						<div class="modal-body">
+							<h6>Enter Bank Details</h6>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="removeMessages-modal"></div>
+									<div class="ajaxloader-modal"></div>
+								</div>
+							</div>
+							<div class="mb-4">
+								<div class="progress progress-md mb-3 hide-me bot-load-modal">
+									<div class="progress-bar progress-bar-indeterminate bg-cyan"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Bank Name</label>
+										<input id="bank-name" type="text" class="form-control" placeholder="Bank Name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Bank Branch</label>
+										<input id="bank-branch" type="text" class="form-control" placeholder="Branch">
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Account Number<small></small>
+										</label>
+										<input id="account-number" type="number" class="form-control" placeholder="Number">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button id="form-submitter-modal" class="btn btn-indigo" type="submit">Save</button>
+							<button class="btn btn-light" data-bs-dismiss="modal" type="button">Close</button>
+						</div>
+					</form>
+                </div>
+			</div>
+		</div>
+
+        
+		<div class="modal fade" id="bank-preview" aria-hidden="true" style="display: none;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content modal-content-demo">
+					<div class="modal-header">
+						<h6 class="modal-title">Bank Preview</h6>
+						<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<form id="bank-form-update">
+						<div class="modal-body">
+							<h6>Acc. (<span id="title-bank-name"></span>) Details</h6>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="removeMessages-modal"></div>
+									<div class="ajaxloader-modal"></div>
+								</div>
+							</div>
+							<div class="mb-4">
+								<div class="progress progress-md mb-3 hide-me bot-load-modal">
+									<div class="progress-bar progress-bar-indeterminate bg-cyan"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+                                <input type="hidden" id="bank-id-up">
+									<div class="mb-3">
+										<label class="form-label">Bank Name</label>
+										<input id="bank-name-up" type="text" class="form-control" placeholder="Bank Name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Bank Branch</label>
+										<input id="bank-branch-up" type="text" class="form-control" placeholder="Branch">
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Account Number<small></small>
+										</label>
+										<input id="account-number-up" type="number" class="form-control" placeholder="Number">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button id="form-submitter-update-modal" class="btn btn-indigo" type="submit">Update</button>
+							<button class="btn btn-light" data-bs-dismiss="modal" type="button">Close</button>
+						</div>
+					</form>
+                </div>
+			</div>
+		</div>
+	{% endblock %}
+	{% block pageScripts %}
+
+		<!-- function js-->
+         <!-- Data tables -->
+        <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/buttons.bootstrap5.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/pdfmake/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/pdfmake/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatable/responsive.bootstrap5.min.js') }}"></script>
+        
+
+		<script src="{{ asset('assets/adminfunc/clients/view_clients.js') }}"></script>
+	{% endblock %}

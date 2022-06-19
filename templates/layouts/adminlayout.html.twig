@@ -1,0 +1,17 @@
+
+
+{% block head %} {% include ('adminincludes/htmlhead.html.twig') %} {% endblock %}
+
+
+{% block mainContent %}
+    {% block sidenav %} {% include ('adminincludes/sidebar.html.twig') %} {% endblock %}
+    {% block topnav %} {% include ('adminincludes/topnav.html.twig') %}  {% endblock %}
+{% endblock %}
+{% block footerr %} {% include ('adminincludes/footer.html.twig') %} {% endblock %}
+
+{% block mainscripts %} {% include ('adminincludes/mainscripts.html.twig') %} {% endblock %}
+
+{% block pageScripts %} {% endblock %}
+
+</body>
+</html>

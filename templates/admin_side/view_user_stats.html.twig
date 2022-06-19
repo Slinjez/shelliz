@@ -1,0 +1,182 @@
+{% extends "layouts/adminlayout.html.twig" %}
+
+{% block head %}
+	{{ parent() }}
+
+	<!-- Data table css -->
+	<link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.css') }}" rel="stylesheet"/>
+	<link href="{{ asset('assets/plugins/datatable/css/buttons.bootstrap5.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('assets/assets/plugins/datatable/responsive.bootstrap5.css') }}" rel="stylesheet"/>
+	<style>
+		.hide-me {
+			display: none;
+		}
+	</style>
+{% endblock %}
+{% block mainContent %}
+	<body
+		class="app sidebar-mini light-mode default-sidebar">
+
+		<!---Global-loader-->
+		<div id="global-loader">
+			<img src="{{ asset('assets/images/loader.svg') }}" alt="loader">
+		</div>
+
+		<div class="page">
+			<div
+				class="page-main">
+
+				<!--aside open-->
+				{% block sidenav %}
+					{{ parent() }}
+				{% endblock %}
+				<!--aside closed-->
+
+				<div class="app-content main-content">
+					<div
+						class="side-app">
+
+						<!--app header-->
+						{% block topnav %}
+							{{ parent() }}
+
+						{% endblock %}
+						<!--/app header-->
+
+						<!--Row-->
+						<div class="row">
+							<div
+								class="side-app">
+
+								<!--Page header-->
+								<div class="page-header">
+									<div class="page-leftheader">
+										<h4 class="page-title">{{page_name}}</h4>
+									</div>
+									<div class="page-rightheader ms-auto d-lg-flex d-none">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item">
+												<a href="/admin-dash" class="d-flex">
+													<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"/><path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3"/></svg>
+													<span class="breadcrumb-icon">
+														Home</span>
+												</a>
+											</li>
+											<li class="breadcrumb-item">
+												<a href="javascript:void(0)">{{page_name}}</a>
+											</li>
+											<li class="breadcrumb-item">
+												<div class="page-rightheader ms-auto d-lg-flex d-none">
+													<div class="ms-5 mb-0">
+														<a class="btn btn-white date-range-btn" href="javascript:void(0)" id="daterange-btn-chart">
+															<svg class="header-icon2 me-3" x="1008" y="1248" viewbox="0 0 24 24" height="100%" width="100%" preserveaspectratio="xMidYMid meet" focusable="false">
+																<path d="M5 8h14V6H5z" opacity=".3"/><path d="M7 11h2v2H7zm12-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-4 3h2v2h-2zm-4 0h2v2h-2z"/>
+															</svg>
+															<span>Select Date
+																<i class="fa fa-caret-down"></i>
+															</span>
+														</a>
+													</div>
+												</div>
+											</li>
+										</ol>
+
+
+									</div>
+								</div>
+								<!--End Page header-->
+
+								<!-- Row -->
+								<div class="row">
+									<div
+										class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+										<!--div-->
+										<div class="card">
+											<div class="card-header">
+												<div class="card-title">{{page_description}}</div>
+											</div>
+											<div class="card-body">
+												<div class="table-responsive">
+													<table class="table table-bordered text-nowrap" id="result-table">
+														<thead>
+															<tr>
+																<th class="wd-15p border-bottom-0">Client Name</th>
+																<th class="wd-15p border-bottom-0">Client Email</th>
+																<th class="wd-20p border-bottom-0">Client Phone</th>
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!--/div-->
+									</div>
+									<div
+										class="col-xl-7 col-lg-7 col-md-12 col-sm-12">
+										<!--div-->
+										<div class="card">
+											<div class="card-header">
+												<div class="card-title">{{page_description}}</div>
+											</div>
+											<div class="card-body">
+												<div class="col-12 hide-me" id="char-load-status">
+													<div class="col-12 alerts-div">
+														<div class="col-md-12 mb-4">
+															<div class="removeLoginMessages row"></div>
+															<div class="ajaxLoginloader"></div>
+														</div>
+													</div>
+												</div>
+												<div id="container"></div>
+											</div>
+										</div>
+										<!--/div-->
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- end app-content-->
+			</div>
+
+			<!--Footer-->
+
+			<!-- End Footer-->
+
+		</div>
+
+		<!-- Back to top -->
+		<a href="#top" id="back-to-top">
+			<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+		</a>
+
+
+	{% endblock %}
+	{% block pageScripts %}
+
+		<!-- function js-->
+		<!-- Data tables --><script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"> </script>
+		<script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/js/buttons.bootstrap5.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/pdfmake/pdfmake.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/pdfmake/vfs_fonts.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/datatable/responsive.bootstrap5.min.js') }}"></script>
+
+
+		<script src="{{ asset('assets/plugins/highchart/code/highcharts.js') }}"></script>
+		<script src="{{ asset('assets/plugins/highchart/code/modules/exporting.js') }}"></script>
+		<script src="{{ asset('assets/plugins/highchart/code/modules/export-data.js') }}"></script>
+		<script src="{{ asset('assets/plugins/highchart/code/modules/accessibility.js') }}"></script>
+
+		<script src="{{ asset('assets/adminfunc/clients/view_clients.js') }}"></script>
+	{% endblock %}
+	

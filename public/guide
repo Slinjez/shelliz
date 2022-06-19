@@ -1,0 +1,30 @@
+https://www.doctrine-project.org/2021/03/29/dbal-2.13.html
+
+php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
+
+
+create migration
+    bin/console doctrine:database:create
+    bin/console make:migration
+    bin/console doctrine:migrations:migrate
+
+create entity from database
+    bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
+    bin/console make:entity --regenerate App
+
+create repos from entity
+--ensure @ORM\Entity(repositoryClass="App\Repository\MyClassRepository")
+    bin/console make:entity --regenerate
+    Just press Enter or specify the location of your entity folder like App\Entity, and it will create missing getters/setters & Repositories.
+
+create lost table from entities
+    bin/console doctrine:schema:update --force
+
+
+sessions
+1 new unpaid
+2 paid pending trainer confirmation
+3 paid ongoing
+4. complete
+5 canceled
+

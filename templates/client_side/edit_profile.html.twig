@@ -1,0 +1,434 @@
+{% extends "layouts/portallayout.html.twig" %}
+
+{% block head %}
+	{{ parent() }}
+	<style>
+		.hide-me {
+			display: none;
+		}
+	</style>
+{% endblock %}
+{% block mainContent %}
+	<body
+		class="app sidebar-mini light-mode default-sidebar">
+
+		<!---Global-loader-->
+		<div id="global-loader">
+			<img src="https://spruko.com/demo/django/dashtic/DASHTIC/assets/images/svgs/loader.svg" alt="loader">
+		</div>
+
+		<div class="page">
+			<div
+				class="page-main">
+
+				<!--aside open-->
+				{% block sidenav %}
+					{{ parent() }}
+				{% endblock %}
+				<!--aside closed-->
+
+				<div class="app-content main-content">
+					<div
+						class="side-app">
+
+						<!--app header-->
+						{% block topnav %}
+							{{ parent() }}
+						{% endblock %}
+						<!--/app header-->
+
+						<!--Row-->
+						<div class="row">
+							<div
+								class="side-app">
+
+								<!--Page header-->
+								<div class="page-header">
+									<div class="page-leftheader">
+										<h4 class="page-title">{{page_name}}</h4>
+									</div>
+									<div class="page-rightheader ms-auto d-lg-flex d-none">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item">
+												<a href="/client-dash" class="d-flex">
+													<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"/><path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3"/></svg>
+													<span class="breadcrumb-icon">
+														Home</span>
+												</a>
+											</li>
+											<li class="breadcrumb-item">
+												<a href="javascript:void(0)">{{page_name}}</a>
+											</li>
+										</ol>
+									</div>
+								</div>
+								<!--End Page header-->
+
+								<!-- Row -->
+								<div class="row">
+									<div class="col-xl-4 col-lg-5">
+										<div class="card box-widget widget-user">
+											<div class="widget-user-image mx-auto mt-5 text-center"><img alt="User Avatar" class="rounded-circle rounded-circle-profile-force putMyPicHere" src="../../assets/images/users/16.jpg"></div>
+											<div class="card-body text-center">
+												<div class="pro-user">
+													<h3 class="pro-user-username text-dark mb-1 portal-user-name"></h3>
+													<h6 class="pro-user-desc text-muted">***</h6>
+													<a href="/client-vw-own-profile" class="btn btn-primary mt-3">View Profile</a>
+												</div>
+											</div>
+										</div>
+										<div class="card ">
+											<div class="card-header">
+												<div class="card-title">Edit Password</div>
+											</div>
+											<div class="card-body">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="removeMessages-ps"></div>
+														<div class="ajaxloader-ps"></div>
+													</div>
+												</div>
+												<div class="mb-4 hide-me bot-load-ps">
+													<div class="progress progress-md mb-3">
+														<div class="progress-bar progress-bar-indeterminate bg-cyan"></div>
+													</div>
+												</div>
+
+												<form action="#" id="update-ps-form">
+													<div class="input-group mb-3">
+														<span class="input-group-addon" onclick="show_password_old()">
+															<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24">
+																<g fill="none"><path d="M0 0h24v24H0V0z"/><path d="M0 0h24v24H0V0z" opacity=".87"/></g><path d="M6 20h12V10H6v10zm6-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" opacity=".3"/><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+														</span>
+														<input id="oldpassword" type="password" class="form-control ps-field" placeholder="Current Password">
+													</div>
+													<div class="input-group mb-3">
+														<span class="input-group-addon" onclick="show_password_new()">
+															<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24">
+																<g fill="none"><path d="M0 0h24v24H0V0z"/><path d="M0 0h24v24H0V0z" opacity=".87"/></g><path d="M6 20h12V10H6v10zm6-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" opacity=".3"/><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+														</span>
+														<input id="loginpassword" type="password" class="form-control ps-field" placeholder="New Password">
+													</div>
+													<div class="row">
+
+														<div class="col-12">
+															<button id="form-submitter-update-ps" type="submit" class="btn btn-lg btn-primary btn-block">
+																<i class="fe fe-arrow-right"></i>
+																Update Password</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+
+
+										<div class="card ">
+											<div class="card-header">
+												<div class="card-title">Profile Picture</div>
+											</div>
+											<form id="prof-pic-form">
+											<div class="row">
+													<div class="col-md-12">
+														<div class="removeMessages-prof-pic"></div>
+														<div class="ajaxloader-prof-pic"></div>
+													</div>
+												</div>
+												<div class="mb-4 hide-me bot-load-prof-pic">
+													<div class="progress progress-md mb-3 ">
+														<div class="progress-bar progress-bar-indeterminate bg-cyan"></div>
+													</div>
+												</div>
+
+											<div class="card-body">
+
+												<div class="mt-3 form-group">
+													<p><br>Upload profile picture
+														<small>(best fit 500x500px)</small>
+													</p>
+													<div action="" class="dropzone col-md-12" id="my-awesome-dropzone" name="my-awesome-dropzone"></div>
+												</div>
+											</div>
+											<div class="card-footer text-end">
+												<button id="new-event" type="submit" class="btn btn-lg btn-primary btn-block">
+																<i class="fe fe-arrow-right"></i>
+																Update Profile Picture</button>
+											</div>
+											</form>
+										</div>
+									</div>
+
+									<div class="col-xl-8 col-lg-7">
+										<div class="card">
+											<form id="data-form">
+												<div class="card-header">
+													<div class="card-title">Edit Profile</div>
+												</div>
+												<div class="card-body">
+													<div class="card-title font-weight-bold">Basic info:</div>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="removeMessages"></div>
+															<div class="ajaxloader"></div>
+														</div>
+													</div>
+													<div class="mb-4">
+														<div class="progress progress-md mb-3 hide-me bot-load">
+															<div class="progress-bar progress-bar-indeterminate bg-cyan"></div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-12 col-md-12">
+															<div class="mb-3">
+																<label class="form-label">Full Name</label>
+																<input id="full-name" type="text" class="form-control" placeholder="Full Name">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="mb-3">
+																<label class="form-label">Address</label>
+																<input id="address" type="text" class="form-control" placeholder="Home Address">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-6">
+															<div class="mb-3">
+																<label class="form-label">Phone Number<small>254712345678</small>
+																</label>
+																<input id="phone-number" type="number" class="form-control" placeholder="Number">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-6">
+															<div class="mb-3">
+																<label class="form-label">Id Number</label>
+																<input id="id-number" type="number" class="form-control" placeholder="Email">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-6">
+															<div class="mb-3">
+																<label class="form-label">Pin</label>
+																<input id="pin" type="text" class="form-control" placeholder="Number">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-4">
+															<div class="mb-3">
+																<label class="form-label">City/Town</label>
+																<input id="city" type="text" class="form-control" placeholder="City">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-3">
+															<div class="mb-3">
+																<label class="form-label">Postal Code</label>
+																<input id="postal-code" type="text" class="form-control" placeholder="10000">
+															</div>
+														</div>
+														<div class="col-md-5">
+															<div class="mb-3">
+																<label class="form-label">Country</label>
+																<select id="status-select" class="form-control"></select>
+															</div>
+														</div>
+													</div>
+													<div class="card-title font-weight-bold mt-5 hide-me">External Links:</div>
+													<div class="row hide-me">
+														<div class="col-sm-6 col-md-6">
+															<div class="mb-3">
+																<label class="form-label">website</label>
+																<input type="url" class="form-control" placeholder="https://www.me.com/">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-6">
+															<div class="mb-3">
+																<label class="form-label">Facebook</label>
+																<input type="url" class="form-control" placeholder="https://www.facebook.com/">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-6">
+															<div class="mb-3">
+																<label class="form-label">Instagram</label>
+																<input type="url" class="form-control" placeholder="https://www.instagram.com/">
+															</div>
+														</div>
+														<div class="col-sm-6 col-md-6">
+															<div class="mb-3">
+																<label class="form-label">Twitter</label>
+																<input type="url" class="form-control" placeholder="https://twitter.com/">
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer text-end">
+													<button id="form-submitter" type="submit" class="btn btn-lg btn-primary">Update Info</button>
+												</div>
+											</form>
+
+											<div class="card-body">
+												<hr>
+												<h5 class="font-weight-bold">Bank Details</h5>
+												<div class="main-profile-bio mb-0">
+													<button data-bs-target="#new-bank" data-bs-toggle="modal" type="button" class="btn btn-twitter text-end">
+														<i class="fas fa-plus"></i>
+														Add Bank Details</button>
+													<div class="table-responsive">
+														<table class="table table-hover card-table table-vcenter text-nowrap mb-0">
+															<thead>
+																<tr>
+																	<th>Bank</th>
+																	<th>Branch</th>
+																	<th>Account Number</th>
+																	<th>Status</th>
+																	<th>Action</th>
+																</tr>
+															</thead>
+															<tbody id="bank-table-body">
+																<tr>
+																	<th scope="row">-</th>
+																	<td>-</td>
+																	<td>-</td>
+																	<td>-</td>
+																	<td>-</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- end app-content-->
+			</div>
+
+			<!--Footer-->
+
+			<!-- End Footer-->
+
+		</div>
+
+		<!-- Back to top -->
+		<a href="#top" id="back-to-top">
+			<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewbox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+		</a>
+
+		<div class="modal fade" id="new-bank" aria-hidden="true" style="display: none;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content modal-content-demo">
+					<div class="modal-header">
+						<h6 class="modal-title">New Bank</h6>
+						<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<form id="bank-form">
+						<div class="modal-body">
+							<h6>Enter Bank Details</h6>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="removeMessages-modal"></div>
+									<div class="ajaxloader-modal"></div>
+								</div>
+							</div>
+							<div class="mb-4">
+								<div class="progress progress-md mb-3 hide-me bot-load-modal">
+									<div class="progress-bar progress-bar-indeterminate bg-cyan"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Bank Name</label>
+										<input id="bank-name" type="text" class="form-control" placeholder="Bank Name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Bank Branch</label>
+										<input id="bank-branch" type="text" class="form-control" placeholder="Branch">
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Account Number<small></small>
+										</label>
+										<input id="account-number" type="number" class="form-control" placeholder="Number">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button id="form-submitter-modal" class="btn btn-indigo" type="submit">Save</button>
+							<button class="btn btn-light" data-bs-dismiss="modal" type="button">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="bank-preview" aria-hidden="true" style="display: none;">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content modal-content-demo">
+					<div class="modal-header">
+						<h6 class="modal-title">Bank Preview</h6>
+						<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<form id="bank-form-update">
+						<div class="modal-body">
+							<h6>Acc. (<span id="title-bank-name"></span>) Details</h6>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="removeMessages-modal"></div>
+									<div class="ajaxloader-modal"></div>
+								</div>
+							</div>
+							<div class="mb-4">
+								<div class="progress progress-md mb-3 hide-me bot-load-modal">
+									<div class="progress-bar progress-bar-indeterminate bg-cyan"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<input type="hidden" id="bank-id-up">
+									<div class="mb-3">
+										<label class="form-label">Bank Name</label>
+										<input id="bank-name-up" type="text" class="form-control" placeholder="Bank Name">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Bank Branch</label>
+										<input id="bank-branch-up" type="text" class="form-control" placeholder="Branch">
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Account Number<small></small>
+										</label>
+										<input id="account-number-up" type="number" class="form-control" placeholder="Number">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button id="form-submitter-update-modal" class="btn btn-indigo" type="submit">Update</button>
+							<button class="btn btn-light" data-bs-dismiss="modal" type="button">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+	{% block pageScripts %}
+		<script src="{{ asset('assets/func/profile/view_prof.js') }}"></script>
+	{% endblock %}

@@ -1,0 +1,17 @@
+
+
+{% block head %} {% include ('portalincludes/htmlhead.html.twig') %} {% endblock %}
+
+
+{% block mainContent %}
+    {% block sidenav %} {% include ('portalincludes/sidebar.html.twig') %} {% endblock %}
+    {% block topnav %} {% include ('portalincludes/topnav.html.twig') %}  {% endblock %}
+{% endblock %}
+{% block footerr %} {% include ('portalincludes/footer.html.twig') %} {% endblock %}
+
+{% block mainscripts %} {% include ('portalincludes/mainscripts.html.twig') %} {% endblock %}
+
+{% block pageScripts %} {% endblock %}
+
+</body>
+</html>
